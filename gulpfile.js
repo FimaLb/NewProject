@@ -1,20 +1,22 @@
-var gulp        = require('gulp'),
-	sass        = require('gulp-sass'),
-	browserSync = require('browser-sync'),
-	concat      = require('gulp-concat'),
-	uglify      = require('gulp-uglifyjs'),
-	cssnano     = require('gulp-cssnano'),
-	rename      = require('gulp-rename'),
-	del         = require('del'),
-	imagemin    = require('gulp-imagemin'),
-	qngquant    = require('imagemin-pngquant'),
-	cache       = require('gulp-cache');
+var gulp         = require('gulp'),
+	sass         = require('gulp-sass'),
+	browserSync  = require('browser-sync'),
+	concat       = require('gulp-concat'),
+	uglify       = require('gulp-uglifyjs'),
+	cssnano      = require('gulp-cssnano'),
+	rename       = require('gulp-rename'),
+	del          = require('del'),
+	imagemin     = require('gulp-imagemin'),
+	qngquant     = require('imagemin-pngquant'),
+	cache        = require('gulp-cache'),
+	autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('sass', function(){
 	return gulp.src('app/sass/**/*.sass')
-	.pipe(sass())
-	.pipe(gulp.dest('app/css'))
-	.pipe(browserSync.reload({stream:true}))
+			.pipe(sass())
+			.pipe(autoprefixer(['last 15 versions' , '>1%', 'ie 8', 'ie 7'], {cascade: true}))
+			.pipe(gulp.dest('app/css'))
+			.pipe(browserSync.reload({stream:true}))
 });
 
 //transform jquery.js to min.js
@@ -23,18 +25,18 @@ gulp.task('scripts', function(){
 		'app/libs/jquery/dist/jquery.min.js',
 		'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
 		])
-	.pipe(concat('libs.min.js'))
-	.pipe(uglify())
-	.pipe(gulp.dest('app/js'));
+			.pipe(concat('libs.min.js'))
+			.pipe(uglify())
+			.pipe(gulp.dest('app/js'));
 });
 
 //Сompression libs css
 
 gulp.task('css-libs', function(){
 	return gulp.src('app/css/libs.css')
-	.pipe(cssnano())
-	.pipe(rename({suffix:'.min'}))
-	.pipe(gulp.dest('app/css'));
+		.pipe(cssnano())
+		.pipe(rename({suffix:'.min'}))
+		.pipe(gulp.dest('app/css'));
 });
 
 //Reload browser
@@ -53,13 +55,13 @@ gulp.task('clear', function(){
 
 gulp.task('img', function(){
 	return gulp.src('app/img/**/*')
-	.pipe(cache(imagemin({
-		interlaced: true,
-		progressive: true,
-		svgoPlugins:[{removeViewBox: false}],
-		use:[pngquant()]
-	})))
-	.pipe(gulp.dest('dist/img'));
+		.pipe(cache(imagemin({
+			interlaced: true,
+			progressive: true,
+			svgoPlugins:[{removeViewBox: false}],
+			use:[pngquant()]
+		})))
+		.pipe(gulp.dest('dist/img'));
 });
 
 //Clean build
@@ -80,12 +82,13 @@ gulp.task('build', function(){
 		'app/css/min.css',
 		'app/css/libs.min.css',
 		])
-	.pipe(gulp.dest('dist/css'));
+		.pipe(gulp.dest('dist/css'));
+
 	var buildFonts = gulp.src('app/fonts/**/*')
-	.pipe(gulp.dest('dist/fonts'));
+		.pipe(gulp.dest('dist/fonts'));
 
 	var buildJs = gulp.src('app/js/**/*')
-	.pipe(gulp.dest('dist/js'));
+		.pipe(gulp.dest('dist/js'));
 
 	var boildHtml = gulp.src('app/*.html')
 
