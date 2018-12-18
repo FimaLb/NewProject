@@ -9,7 +9,8 @@ var gulp         = require('gulp'),
 	imagemin     = require('gulp-imagemin'),
 	qngquant     = require('imagemin-pngquant'),
 	cache        = require('gulp-cache'),
-	autoprefixer = require('gulp-autoprefixer');
+	autoprefixer = require('gulp-autoprefixer'),
+	pug			 = require('gulp-pug');
 
 gulp.task('sass', function(){
 	return gulp.src('app/sass/**/*.sass')
@@ -17,6 +18,12 @@ gulp.task('sass', function(){
 			.pipe(autoprefixer(['last 15 versions' , '>1%', 'ie 8', 'ie 7'], {cascade: true}))
 			.pipe(gulp.dest('app/css'))
 			.pipe(browserSync.reload({stream:true}))
+});
+
+gulp.task('pug', function(){
+	return gulp.src('app/pug/**/*.pug')
+		.pipe(pug({pretty:true}))
+		.pipe(gulp.dest('static/pages/'));
 });
 
 //transform jquery.js to min.js
