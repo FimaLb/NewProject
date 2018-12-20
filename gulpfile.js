@@ -23,7 +23,7 @@ gulp.task('sass', function(){
 gulp.task('pug', function(){
 	return gulp.src('app/pug/**/*.pug')
 		.pipe(pug({pretty:true}))
-		.pipe(gulp.dest('app/static/pages/'));
+		.pipe(gulp.dest('app'));
 });
 
 //transform jquery.js to min.js
@@ -50,7 +50,7 @@ gulp.task('css-libs', function(){
 gulp.task('browser-sync', function(){
 	browserSync.init({
 		server:{
-			baseDir: 'app/static/pages'
+			baseDir: 'app'
 		},
 		notify: false
 	});
@@ -79,8 +79,8 @@ gulp.task('clean', function(){
 
 gulp.task('watch', function(){
 	gulp.watch('app/sass/*.sass', gulp.series('sass'));
-	gulp.watch('app/static/pages/*.html', browserSync.reload);
-	gulp.watch('app/static/js/**/*.js', browserSync.reload);
+	gulp.watch('app/static/js/**/*.js', gulp.series('scripts'));
+	gulp.watch('app/pug/**/*.pug', gulp.series('pug'));
 });
 
 gulp.task('default', gulp.series(
@@ -102,8 +102,8 @@ gulp.task('build', function(){
 	var buildJs = gulp.src('app/static/js/**/*')
 		.pipe(gulp.dest('dist/js'));
 
-	var boildHtml = gulp.src('app/static/pages/*.html')
-		.pipe(gulp.dest('dist/pages'));
+	var boildHtml = gulp.src('app/*.html')
+		.pipe(gulp.dest('dist'));
 });
 
 //Update or create dist
