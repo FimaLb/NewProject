@@ -1,13 +1,23 @@
 .header__main
-	.header__Logo.Logo
-		img(src="/app/static/img" alt="Доготип").Logo__img
-	.header__phones
-		.header__item
-			a(href="tel:8923432520").header__phone 8 (923) 43-25-20
-			a(href="tel:8923432520").header__link Заказать звонок
-		.header__item
-			a(href="tel:8923432520").header__phone 8 (923) 43-25-20
-			a(href="tel:8923432520").header__link Заказать звонок
-	.header__address
-		+icon('location', 'header-adderss__icon')
-		span.header-address__text Днепр, пр-т Любарского, 11 к. 2
+	.container
+		.header__content
+			.header__logo.logo
+				img(src="/app/static/img" alt="Доготип").logo__img
+			.header__phones
+				.header__item
+					a(href="tel:8923432520").header__phone 8 (923) 43-25-20
+					a(href="tel:8923432520").header__link Заказать звонок
+				.header__item
+					a(href="tel:8923432520").header__phone 8 (923) 43-25-20
+					span.header__description Звонок бесплатный
+			.header__address.header-address
+				+icon('location', 'header-adderss__icon')
+				span.header-address__text Днепр, пр-т Любарского, 11 к. 2
+			.heaser__shop
+				.header-goods
+					span.header-goods__prise
+					span.header-goods__count 0 товаров &#8381
+				.header-basket
+					+icon('', 'header-basket__icon')
+					span.header-basket-text Корзина
+				
