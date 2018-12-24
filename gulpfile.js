@@ -1,37 +1,37 @@
-var gulp         = require('gulp'),
-	sass         = require('gulp-sass'),
-	browserSync  = require('browser-sync').create(),
-	concat       = require('gulp-concat'),
-	uglify       = require('gulp-uglifyjs'),
-	cssnano      = require('gulp-cssnano'),
-	rename       = require('gulp-rename'),
-	del          = require('del'),
-	imagemin     = require('gulp-imagemin'),
-	qngquant     = require('imagemin-pngquant'),
-	cache        = require('gulp-cache'),
+var gulp = require('gulp'),
+	sass = require('gulp-sass'),
+	browserSync = require('browser-sync').create(),
+	concat = require('gulp-concat'),
+	uglify = require('gulp-uglifyjs'),
+	cssnano = require('gulp-cssnano'),
+	rename = require('gulp-rename'),
+	del = require('del'),
+	imagemin = require('gulp-imagemin'),
+	pngquant = require('imagemin-pngquant'),
+	cache = require('gulp-cache'),
 	autoprefixer = require('gulp-autoprefixer'),
-	pug			 = require('gulp-pug');
+	pug = require('gulp-pug');
 
-gulp.task('sass', function(){
+gulp.task('sass', function () {
 	return gulp.src('app/sass/**/*.sass')
 		.pipe(sass())
-		.pipe(autoprefixer(['last 15 versions' , '>1%', 'ie 8', 'ie 7'], {cascade: true}))
+		.pipe(autoprefixer(['last 15 versions', '>1%', 'ie 8', 'ie 7'], { cascade: true }))
 		.pipe(gulp.dest('app/static/css'))
-		.pipe(browserSync.reload({stream:true}))
+		.pipe(browserSync.reload({ stream: true }))
 });
 
-gulp.task('pug', function(){
+gulp.task('pug', function () {
 	return gulp.src('app/pug/**/*.pug')
-		.pipe(pug({pretty:true}))
+		.pipe(pug({ pretty: true }))
 		.pipe(gulp.dest('app'));
 });
 
 //transform jquery.js to min.js
-gulp.task('scripts', function(){
+gulp.task('scripts', function () {
 	return gulp.src([
 		'app/static/libs/jquery/dist/jquery.min.js',
 		'app/static/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
-		])
+	])
 		.pipe(concat('libs.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('app/static/js'));
@@ -39,17 +39,17 @@ gulp.task('scripts', function(){
 
 //Сompression libs css
 
-gulp.task('css-libs', function(){
+gulp.task('css-libs', function () {
 	return gulp.src('app/static/css/libs.css')
 		.pipe(cssnano())
-		.pipe(rename({suffix:'.min'}))
+		.pipe(rename({ suffix: '.min' }))
 		.pipe(gulp.dest('dist/static/css'));
 });
 
 //Reload browser
-gulp.task('browser-sync', function(){
+gulp.task('browser-sync', function () {
 	browserSync.init({
-		server:{
+		server: {
 			baseDir: 'app'
 		},
 		notify: false
@@ -57,43 +57,43 @@ gulp.task('browser-sync', function(){
 	browserSync.watch('app', browserSync.reload);
 });
 //Image
-gulp.task('clear', function(){
+gulp.task('clear', function () {
 	return cache.clearAll();
 });
 
-gulp.task('img', function(){
+gulp.task('img', function () {
 	return gulp.src('app/static/img/**/*')
 		.pipe(cache(imagemin({
 			interlaced: true,
 			progressive: true,
-			svgoPlugins:[{removeViewBox: false}],
-			use:[pngquant()]
+			svgoPlugins: [{ removeViewBox: false }],
+			use: [pngquant()]
 		})))
 		.pipe(gulp.dest('dist/static/img'));
 });
 
 //Clean build
-gulp.task('clean', function(){
+gulp.task('clean', function () {
 	return del.sync('dist');
 });
 
-gulp.task('watch', function(){
+gulp.task('watch', function () {
 	gulp.watch('app/sass/*.sass', gulp.series('sass'));
 	gulp.watch('app/static/js/**/*.js', gulp.series('scripts'));
 	gulp.watch('app/pug/**/*.pug', gulp.series('pug'));
 });
 
 gulp.task('default', gulp.series(
-	gulp.parallel('sass','pug'),
-	gulp.parallel('browser-sync','watch')
+	gulp.parallel('sass', 'pug'),
+	gulp.parallel('browser-sync', 'watch')
 ));
 
 //////
-gulp.task('build', function(){
+gulp.task('build', function () {
 	var buildCss = gulp.src([
 		'app/static/css/min.css',
 		'app/static/css/libs.min.css',
-		])
+	])
 		.pipe(gulp.dest('dist/css'));
 
 	var buildFonts = gulp.src('app/static/fonts/**/*')
@@ -108,9 +108,9 @@ gulp.task('build', function(){
 
 //Update or create dist
 gulp.task('dist', gulp.series(
-	gulp.parallel('pug','scripts',
-		gulp.series('clean','img'),
-		gulp.series('sass','css-libs')
+	gulp.parallel('pug', 'scripts',
+		gulp.series('clean', 'img'),
+		gulp.series('sass', 'css-libs')
 	),
 	gulp.series('build')
 ));
