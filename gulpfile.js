@@ -14,6 +14,7 @@ var gulp = require('gulp'),
 
 gulp.task('sass', function () {
 	return gulp.src('app/sass/**/*.sass')
+		.pipe(concat('main.sass'))
 		.pipe(sass())
 		.pipe(autoprefixer(['last 15 versions', '>1%', 'ie 8', 'ie 7'], { cascade: true }))
 		.pipe(gulp.dest('app/static/css'))
@@ -21,9 +22,9 @@ gulp.task('sass', function () {
 });
 
 gulp.task('pug', function () {
-	return gulp.src('app/pug/**/*.pug')
+	return gulp.src('app/pug/index.pug')
 		.pipe(pug({ pretty: true }))
-		.pipe(gulp.dest('app'));
+		.pipe(gulp.dest('app/html'));
 });
 
 //transform jquery.js to min.js
@@ -50,7 +51,7 @@ gulp.task('css-libs', function () {
 gulp.task('browser-sync', function () {
 	browserSync.init({
 		server: {
-			baseDir: 'app'
+			baseDir: 'app/html'
 		},
 		notify: false
 	});

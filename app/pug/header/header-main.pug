@@ -1,8 +1,27 @@
+//- mixin icon(name,type, className)
+//- 	img(src="/app/static/img/"+name.type alt="Доготип").class
+
+//-     - var sprite = "img/icons/svg/sprite/sprite.svg"
+
+//- 	svg(class=className aria-hidden=true)&attributes(attributes)
+//-     	use(xlink:href= sprite + '#' + name)
+
+//- mixin icon(name, size, fill)
+//-     - var size = size || 24;
+//-     - var sprite = "img/icons/svg/sprite/sprite.svg"
+//-     - var prefix = ""
+    
+//-     span.icon(aria-hidden="true")&attributes(attributes)
+//-         svg(viewBox='0 0 ' + size + ' ' + size width=size height=size fill=fill)
+//-             use(xlink:href= sprite + '#' + name)
+//- mixin icon(icon)
+//-   svg(class="icon--#{icon}" aria-hidden=true role="presentation")&attributes(attributes)
+//-     use(xlink:href="#icon-#{icon}")			
 .header__main
 	.container
 		.header__content
 			.header__logo.logo
-				img(src="/app/static/img" alt="Доготип").logo__img
+				img(src="../static/img/logo.gif" alt="Логотип").logo__img
 			.header__phones
 				.header__item
 					a(href="tel:8923432520").header__phone 8 (923) 43-25-20
@@ -11,13 +30,13 @@
 					a(href="tel:8923432520").header__phone 8 (923) 43-25-20
 					span.header__description Звонок бесплатный
 			.header__address.header-address
-				+icon('location', 'header-adderss__icon')
+				//- +icon('location', 'svg', 'header-adderss__icon')
 				span.header-address__text Днепр, пр-т Любарского, 11 к. 2
 			.heaser__shop
 				.header-goods
 					span.header-goods__prise
-					span.header-goods__count 0 товаров &#8381
+					span.header-goods__count 0 товаров U+20B4
 				.header-basket
-					+icon('', 'header-basket__icon')
+					//- +icon('', 'header-basket__icon')
 					span.header-basket-text Корзина
 				
