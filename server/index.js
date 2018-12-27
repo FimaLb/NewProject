@@ -1,5 +1,5 @@
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
+import { MongoClient } from 'mongodb';
+import { equal } from 'assert';
 
 // Connection URL
 const url = 'mongodb://localhost:27017/goods';
@@ -8,16 +8,20 @@ const url = 'mongodb://localhost:27017/goods';
 const dbName = 'shop';
 
 // Use connect method to connect to the server
-MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-  assert.equal(null, err);
-  console.log("Connected successfully to server");
+MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
+	equal(null, err);
+	
+	console.log('Client: ' + client);
+	console.log("Connected successfully to server");
 
-  var collection = db.collection('test_insert');
-  collection.insert({a:3},function(err,docs){
+	const db = client.db(dbName);
+	var collection = db.collection('test_insert');
+	
+	collection.insert({ a: 3 }, function (err, docs) {
+		equal(null, err);
+		console.log('insert complet');
+		console.log("Docs:" + docs);
+	});
 
-  	console.log('insert complet');
-  });
-  const db = client.db(dbName);
-
-  client.close();
+	client.close();
 });
