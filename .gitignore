@@ -3,6 +3,7 @@
 /node_modules/
 /dist/
 /mongodb/
+/server/
 package-lock.json
 *.html
 *.css
