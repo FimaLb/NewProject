@@ -47,16 +47,20 @@ button
 *, *:before, *:after
 	box-sizing: border-box
 
-wrapper
+.wrapper
 	display: flex
 	flex-direction: columns
 	height: 100%
-
-content
+	margin: 0 auto
+	max-width: $content-size
+	width: 100%
+	
+.content
 	flex: 1 0 auto
 
-container
-	margin: 0 auto
+.container
+	display: flex
+	justify-content: center
 	max-width: $content-size
 	width: 100%
 

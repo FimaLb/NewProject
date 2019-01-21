@@ -4,6 +4,7 @@
 /dist/
 /mongodb/
 /server/
+/chat/
 package-lock.json
 *.html
 *.css
