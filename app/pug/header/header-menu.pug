@@ -3,5 +3,52 @@
 		.header__content
 			nav.header__main-nav.main-nav
 				ul.main-nav__list
+					li.main-nav__item
+						a(href="").main-nav__link Самокаты
+						.main-nav-dropdown
+							ul.main-nav-dropdown__list
+								li.main-nav-dropdown__item
+									a(href="").main-nav-dropdown__link
+										span.main-nav-dropdown__text Самокаты
+										+icon('chevron-right', 'svg', 'Chevron', 'main-nav-dropdown__icon')
+								li.main-nav-dropdown__item
+									a(href="").main-nav-dropdown__link
+										span.main-nav-dropdown__text Самокаты
+										+icon('chevron-right', 'svg', 'Chevron', 'main-nav-dropdown__icon')
+					//- li.main-nav__item
+					//- 	a(href="").main-nav__link=Беговелы
+					//- 	ul.main-nav-dropdown__list
+					//- 		li.main-nav-dropdown__item
+					//- 			a(href="").main-nav-dropdown__link=Беговелы
+					//- li.main-nav__item
+					//- 	a(href="").main-nav__link=Велосипеды
+					//- 	ul.main-nav-dropdown__list
+					//- 		li.main-nav-dropdown__item
+					//- 			a(href="").main-nav-dropdown__link=Велосипеды
+					//- li.main-nav__item
+					//- 	a(href="").main-nav__link=Ролики
+					//- 	ul.main-nav-dropdown__list
+					//- 		li.main-nav-dropdown__item
+					//- 			a(href="").main-nav-dropdown__link=Ролики
+					//- li.main-nav__item
+					//- 	a(href="").main-nav__link=Скейты
+					//- 	ul.main-nav-dropdown__list
+					//- 		li.main-nav-dropdown__item
+					//- 			a(href="").main-nav-dropdown__link=Скейты
+					//- li.main-nav__item
+					//- 	a(href="").main-nav__link="Батуты"
+					//- 	ul.main-nav-dropdown__list
+					//- 		li.main-nav-dropdown__item
+					//- 			a(href="").main-nav-dropdown__link="Батуты"
+					//- li.main-nav__item
+					//- 	a(href="").main-nav__link="Аксуссуары и запчачти"
+					//- 	ul.main-nav-dropdown__list
+					//- 		li.main-nav-dropdown__item
+					//- 			a(href="").main-nav-dropdown__link="Аксуссуары и запчачти"
+					//- li.main-nav__item
+					//- 	a(href="").main-nav__link=Еще
+					//- 	ul.main-nav-dropdown__list
+					//- 		li.main-nav-dropdown__item
+					//- 			a(href="").main-nav-dropdown__link=Еще
 			.header__search.search
 				+icon('search', 'svg', 'Search', 'search__icon')
