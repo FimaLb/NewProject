@@ -2,10 +2,17 @@
     &__list
         align-items: center
         display: flex
+        position: relative
     &__item
+        margin-right: 40px
+        &:last-child
+            margin-right: 0
         &:hover
-            .main-nav-dropdown
-               display: block
+            .main-nav
+                &__link
+                    border-bottom-color: $blaze-orange
+                &-dropdown
+                    display: flex
     &__link
         border-bottom: 2px solid transparent
         color: $tundora
@@ -14,9 +21,6 @@
         line-height: 1.88
         font-weight: 600
         padding: 15px 0
-        &:hover
-           border-bottom-color: $blaze-orange
-
     &-dropdown
         display: none
         background-color: #ffffff
@@ -30,6 +34,8 @@
                 color: $blaze-orange
                 .main-nav-dropdown__icon
                     fill: $blaze-orange
+                .main-subnav__list
+                    display: flex
         &__link
             color: $mine-shaft
             display: flex
@@ -44,4 +50,24 @@
             height: 12px
             fill: $silver
             margin-left: auto
+.main-subnav
+    &__list
+        display: none
+        top: 10px
+        left: 100%
+        background-color: #ffffff
+        flex-direction: column
+        box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.75)
+        position: absolute
+    &__item
+        &:hover
+            background-color: $athens-gray
+            color: $blaze-orange
+
+    &__link
+        color: $mine-shaft
+        display: flex
+        padding: 10px 0
+        align-items: center
+        width: 360px
 
